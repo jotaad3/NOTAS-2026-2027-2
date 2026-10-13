@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PREPARA HERMANAS MIRABAL</title>
-<title>Consulta de Calificaciones</title>
+<title>PREPARA HERMANAS MIRABAL - Consulta de Calificaciones</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 *{box-sizing:border-box}
@@ -76,28 +75,28 @@ tr:hover td{background:#f8fbff}
    ======================================================================= */
 const CURSOS = [
   // 1er Año
-  { file: "1ER AÑO A.xlsx", curso: "1er Año A" },
-  { file: "1ER AÑO B.xlsx", curso: "1er Año B" },
+  { file: "1ER_AÑO_A.xlsx", curso: "1er Año A" },
+  { file: "1ER_AÑO_B.xlsx", curso: "1er Año B" },
   // 2do Año
-  { file: "2DO AÑO A.xlsx", curso: "2do Año A" },
-  { file: "2DO AÑO B.xlsx", curso: "2do Año B" },
-  { file: "2DO AÑO C.xlsx", curso: "2do Año C" },
-  { file: "2DO AÑO D.xlsx", curso: "2do Año D" },
+  { file: "2DO_AÑO_A.xlsx", curso: "2do Año A" },
+  { file: "2DO_AÑO_B.xlsx", curso: "2do Año B" },
+  { file: "2DO_AÑO_C.xlsx", curso: "2do Año C" },
+  { file: "2DO_AÑO_D.xlsx", curso: "2do Año D" },
   // 3er Año
-  { file: "3ER AÑO A.xlsx", curso: "3er Año A" },
-  { file: "3ER AÑO B.xlsx", curso: "3er Año B" },
-  { file: "3ER AÑO C.xlsx", curso: "3er Año C" },
-  { file: "3ER AÑO D.xlsx", curso: "3er Año D" },
+  { file: "3ER_AÑO_A.xlsx", curso: "3er Año A" },
+  { file: "3ER_AÑO_B.xlsx", curso: "3er Año B" },
+  { file: "3ER_AÑO_C.xlsx", curso: "3er Año C" },
+  { file: "3ER_AÑO_D.xlsx", curso: "3er Año D" },
   // 4to Año
-  { file: "4TO AÑO A.xlsx", curso: "4to Año A" },
-  { file: "4TO AÑO B.xlsx", curso: "4to Año B" },
-  { file: "4TO AÑO C.xlsx", curso: "4to Año C" },
-  { file: "4TO AÑO D.xlsx", curso: "4to Año D" },
+  { file: "4TO_AÑO_A.xlsx", curso: "4to Año A" },
+  { file: "4TO_AÑO_B.xlsx", curso: "4to Año B" },
+  { file: "4TO_AÑO_C.xlsx", curso: "4to Año C" },
+  { file: "4TO_AÑO_D.xlsx", curso: "4to Año D" },
   // 5to Año
-  { file: "5TO AÑO A.xlsx", curso: "5to Año A" },
-  { file: "5TO AÑO B.xlsx", curso: "5to Año B" },
-  { file: "5TO AÑO C.xlsx", curso: "5to Año C" },
-  { file: "5TO AÑO D.xlsx", curso: "5to Año D" },
+  { file: "5TO_AÑO_A.xlsx", curso: "5to Año A" },
+  { file: "5TO_AÑO_B.xlsx", curso: "5to Año B" },
+  { file: "5TO_AÑO_C.xlsx", curso: "5to Año C" },
+  { file: "5TO_AÑO_D.xlsx", curso: "5to Año D" },
 ];
 
 const materias = {
@@ -116,7 +115,7 @@ let baseDatos=[]; // [{curso, workbook}]
 async function cargarTodo(){
   const status=document.getElementById('status');
   const resultados = await Promise.allSettled(CURSOS.map(async c=>{
-    const res=await fetch(c.file, {cache:"no-store"});
+    const res=await fetch(encodeURI(c.file), {cache:"no-store"});
     if(!res.ok) throw new Error('HTTP '+res.status);
     const buf=await res.arrayBuffer();
     const wb=XLSX.read(buf,{type:'array'});
